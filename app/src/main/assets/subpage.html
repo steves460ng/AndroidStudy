@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width" />
+
+    <!--  jquery 적용 -->
+    <script src="jquery-3.6.0.min.js"></script>
+
+    <!--  부트스트랩 스타일 라이브러리 적용-->
+    <link rel="stylesheet" href="bootstrap.min.css">
+
+    <script>
+    //Native Java에서 호출할 함수 - 파라미터로 값 전달받음
+    function setReceivedMessage(msg)
+    {
+        document.getElementById('msg').innerHTML=msg;
+    }
+
+    //Native Java에게 메세지 보내는 함수
+    function sendMessageToNative()
+    {
+        //input요소에 써 있는 보낼 메세지 얻어오기
+        var msg= document.getElementById('in1').value;
+
+        //안드로이드와 연결하기! (안드로이드에 정의된 클래스.메소드 호출)
+        //Java에서 연결자로 만든 객체의 별명('android')를 통해 원하는 기능 수행
+        window.android.setTextView(msg);
+    }
+
+    // 페이지 이동
+    function pagemove()
+    {
+        // replace()는 히스토리가 남지 않음
+        // location.href = "URL"; 은 히스토리가 남음
+        location.replace("index.html");
+    }
+    </script>
+
+</head>
+<body>
+    <div class="container">
+        <div class="container-fluid full-width">
+        <h5>Native Java로 보낼 메세지 (Sub page)</h5>
+        <input type="text" class="form-control mt-3" id="in1" placeholder="input message">
+        <br/>
+        <button class="btn btn-primary btn-block mt-3" onclick="sendMessageToNative()">
+            send message to Native Android
+        </button>
+        <button class="btn btn-primary btn-block mt-3" onclick="pagemove()">
+            Page location move (index page)
+        </button>
+
+        <h5 class="mt-5">Native Java로부터 받은 메세지</h5>
+        <h6 id="msg" class="mt-3">WAIT......</h6>
+        </div>
+    </div>
+</body>
+
+</html>
